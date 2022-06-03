@@ -13,6 +13,14 @@ function book(title, author, pages, read=false) {
     library.push(this);
 }
 
+// view book insertion form //
+const formView = document.querySelector('.darkened-background')
+const showForm = document.querySelector('.view-form');
+const formBody = document.querySelector('.insertion-form');
+showForm.onclick = () => formView.classList.remove('hidden');
+formBody.onclick = (e) => e.stopPropagation();
+formView.onclick = (e) => formView.classList.add('hidden');
+
 // read button toggle switch //
 const read = document.getElementById('read-button');
 read.addEventListener('click', e => {
@@ -30,6 +38,8 @@ addButton.addEventListener('click', e => {
     // clear the form //
     title.value = '', author.value = '', pages.value = '';
     if (read.classList.contains('on')) read.classList.remove('on');
+    // and hide it //
+    formView.classList.add('hidden')
 
     // update the library //
     updateLibraryView();
@@ -68,3 +78,10 @@ function createBookElement(book) {
     element.append(title, author, pages, read);
     return element;
 }
+
+// temporary books to view //
+for (let i = 0; i < 10; i++) {
+    new book('Title', 'Author', 250, false);
+}
+updateLibraryView();
+

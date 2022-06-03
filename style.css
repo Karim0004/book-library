@@ -1,9 +1,12 @@
+body {
+    margin: 0;
+    padding: 0;
+}
 #read-button {
     padding: 8px 16px;
     background-color: red;
-    transition: 0.5s;
-    border: 1px solid #f25f53;
-
+    transition: 0.2s;
+    border: 2px solid #ffffff;
 }
 
 #read-button.on {
@@ -12,4 +15,61 @@
 
 .library {
     display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    border: 1px solid black;
+    justify-content: start;
+    align-content: flex-start;
+}
+
+.book-card {
+    background-color: #bef264;
+    height: 140px;
+    min-width: 100px;
+}
+
+.sidebar {
+    background-color: beige;
+}
+
+.grid-container {
+    display: grid;
+    grid-template: 50px 1fr / clamp(100px, 20%, 400px) 1fr;
+    min-height: 100vh;
+    box-sizing:content-box;
+}
+
+.sidebar {
+    grid-row: 2 / -1;
+}
+
+nav {
+    grid-column: 1 / -1;
+    position: sticky;
+    top: 0px;
+    background-color: antiquewhite;
+}
+
+.insertion-form {
+    --width-height: clamp(200px, 50vmin, 600px);
+    width: var(--width-height);
+    height: var(--width-height);
+    position: absolute;
+    background-color: rgb(104, 240, 133);
+    top: calc(50% - var(--width-height) / 2);
+    left: calc(50% - var(--width-height) / 2);
+    border-radius: 18px;
+}
+
+.darkened-background {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top:0;
+    left:0;
+    background-color: rgb(0, 0, 0, 0.5);
+}
+
+.hidden {
+    display:none;
 }
