@@ -47,8 +47,9 @@ addButton.addEventListener('click', e => {
 
 function updateLibraryView() {
     clearLibraryView();
-    for (let book of library) {
-        const bookElement = createBookElement(book);
+    for (let bookKey in library) {
+        const bookElement = createBookElement(library[bookKey]);
+        bookElement.setAttribute('data-book-id', bookKey);
         libraryView.appendChild(bookElement);
     }
 }
@@ -64,24 +65,52 @@ function createBookElement(book) {
     element.classList.add('book-card');
     
     const title = document.createElement('p');
+    title.classList.add('book-title');
     title.textContent = book.title;
 
     const author = document.createElement('p');
+    author.classList.add('book-author');
     author.textContent = book.author;
     
-    const pages = document.createElement('p');
-    pages.textContent = book.pages;
-    
+    const pages = document.createElement('div');
+    pages.classList.add('book-pages');
+    const pagesText = document.createElement('p');
+    pagesText.textContent = 'Pages';
+    const pagesNumber = document.createElement('p');
+    pagesNumber.textContent = book.pages;
+    pages.append(pagesNumber, pagesText);
+
+    const removeButton = document.createElement('img');
+    removeButton.classList.add('remove-button');
+    removeButton.setAttribute('src', 'assets/exit-icon.svg');
+    removeButton.addEventListener('click', e => removeBook(e));
+
+    const readButton = document.createElement('img');
+    readButton.classList.add('read-button');
+    readButton.setAttribute('src', 'assets/read-icon.svg');
+
     const read = document.createElement('p');
+    read.classList.add('book-read-status');
     read.textContent = book.read ? 'read' : 'not read';
     
-    element.append(title, author, pages, read);
+    element.append(removeButton, readButton, title, author, pages, read);
     return element;
 }
 
+function removeBook (event) {
+    event.target.parentNode.style.opacity = '0';
+    setTimeout(() => {
+        library.splice(event.target.parentNode.getAttribute('data-book-id'), 1);
+        updateLibraryView();
+    }, 150) 
+
+
+}
+
+
+
 // temporary books to view //
-for (let i = 0; i < 10; i++) {
-    new book('Title', 'Author', 250, false);
+for (let i = 0; i < 20; i++) {
+    new book(`Title ${i}`, 'Author', 250, false);
 }
 updateLibraryView();
-

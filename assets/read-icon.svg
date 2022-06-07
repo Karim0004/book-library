@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg height="80" width="80" xmlns="http://www.w3.org/2000/svg">
+  <polygon points="0,80 80,80 80,0" style="fill:#84cc16"/>
+  <path d="M 51.2 63.5 L 40 52.3 L 42.15 50.15 L 51.2 59.2 L 70.4 40 L 72.55 42.15 L 51.2 63.5 Z" style="fill: rgb(18, 58, 18);"/>
+</svg>
