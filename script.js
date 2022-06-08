@@ -39,7 +39,7 @@ addButton.addEventListener('click', e => {
     title.value = '', author.value = '', pages.value = '';
     if (read.classList.contains('on')) read.classList.remove('on');
     // and hide it //
-    formView.classList.add('hidden')
+    formView.classList.add('hidden');
 
     // update the library //
     updateLibraryView();

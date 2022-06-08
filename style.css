@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Rajdhani:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@600&family=Heebo:wght@700&family=Rajdhani:wght@300&family=Unica+One&display=swap');
 
 :root {
     --color1: #6b21a8;
@@ -12,16 +12,7 @@ body {
     margin: 0;
     padding: 0;
 }
-#read-button {
-    padding: 8px 16px;
-    background-color: red;
-    transition: 0.2s;
-    border: 2px solid #ffffff;
-}
 
-#read-button.on {
-    background-color: green;
-}
 
 .library {
     display: grid;
@@ -52,17 +43,22 @@ body {
 }
 
 .book-title {
-    font-family:'Alfa Slab One';
+    font-family: 'Heebo', 'Passion One', 'Trebuchet MS', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: var(--color1);
+    font-size: 1.1em;
+    line-height: 1.2;
 }
 
 .book-author {
-    font-family:'Rajdhani';
+    font-family:'Rajdhani', Verdana, Geneva, Tahoma, sans-serif;
     font-size: 0.9em;
+    font-weight: 600;
 }
 
 .book-pages {
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Heebo', Verdana, 'Trebuchet MS', 'Segoe UI', Verdana, sans-serif;
+    font-weight: 600;
+    line-height: 1;
 }
 
 .book-pages p {
@@ -74,7 +70,7 @@ body {
 }
 
 .book-card:hover {
-    --opacity: 1;
+    --opacity: 0.8;
 }
 
 .read-button,
@@ -144,12 +140,13 @@ body {
     padding: 16px;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0px 2px 8px var(--color3);
+    box-shadow: 0px 2px 8px rgba(73, 73, 73, 0.5);
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .nav > p {
-    font-size: 24px;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 32px;
+    font-family:'Unica One', Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 900;
     color: var(--color5);
     margin: 0;
@@ -161,6 +158,8 @@ body {
     border: none;
     border-radius: 6px;
     width: 50%;
+    color: var(--color2);
+    font-family: inherit;
 }
 
 .nav > button {
@@ -168,23 +167,85 @@ body {
     color: var(--color1);
     background-color: var(--color3);
     border: none;
+    box-shadow: 0px 0px 4px var(--color2);
     border-radius: 8px;
     font-size: 16px;
     padding: 4px 24px;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: inherit;
+}
+
+.nav > button:hover,
+#add-book:hover {
+    background-color: var(--color4);
+}
+
+.nav > button:active,
+#add-book:active {
+    background-color: var(--color5);
 }
 
 .insertion-form {
-    --width-height: clamp(200px, 50vmin, 600px);
-    width: var(--width-height);
-    height: var(--width-height);
+    --width: clamp(200px, 50vw, 400px);
+    --height: clamp(260px, 20vh, 400px);
+    width: var(--width);
+    height: var(--height);
     position: absolute;
-    background-color: rgb(104, 240, 133);
-    top: calc(50% - var(--width-height) / 2);
-    left: calc(50% - var(--width-height) / 2);
-    border-radius: 18px;
+    background-color: var(--color5);
+    top: calc(50% - var(--height) / 2);
+    left: calc(50% - var(--width) / 2);
+    border-radius: 12px;
+    box-shadow: 0px 6px 12px rgb(200, 200, 200, 0.5);
     transition: all 0.3s ease-in-out;
+    font-family: 'Cairo' ,'Trebuchet MS', Arial, sans-serif;
+    display: grid;
+    grid-template: repeat(4, 1fr) / 30% 70%;
+    align-items: center;
+    justify-items: start;
+    color: var(--color2);
+    padding: 24px;
+    box-sizing: border-box;
+    gap: 12px; 
+}
 
+.insertion-form > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#add-book {
+    padding: 8px 24px;
+    background-color: var(--color3);
+    border: none;
+    border-radius: 4px;
+    color: var(--color1);
+    font-family: inherit;
+    padding: 8px 24px;
+}
+
+.insertion-form > input {
+    background-color: var(--color4);
+    border: 1px solid var(--color3);
+    height: 30px;
+    width: 100%;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: var(--color1);
+    font-family: inherit;
+}
+
+#read-button {
+    background-color: #ffffff;
+    transition: 0.2s;
+    border: 2px solid var(--color3);
+    width: 25px;
+    height: 25px;
+    box-sizing: border-box;
+}
+
+#read-button.on {
+    background-color: var(--color2);
 }
 
 .darkened-background {
