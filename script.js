@@ -162,9 +162,8 @@ function updateSidebar () {
 
 
 // temporary books to view //
-for (let i = 0; i < 20; i++) {
-    new book(`Title ${i}`, 'Author', 250, false);
-}
+new book('Preview Title', 'Author Name', 374, false);
+new book('The Art of War', 'Sun Tzu', 260, true)
 updateLibraryView();
 
 
