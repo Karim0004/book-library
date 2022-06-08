@@ -88,12 +88,14 @@ function createBookElement(book) {
     const readButton = document.createElement('img');
     readButton.classList.add('read-button');
     readButton.setAttribute('src', 'assets/read-icon.svg');
+    readButton.addEventListener('click', e => changeRead(e));
 
-    const read = document.createElement('p');
-    read.classList.add('book-read-status');
-    read.textContent = book.read ? 'read' : 'not read';
+    if (book.read) element.classList.add('read');
     
-    element.append(removeButton, readButton, title, author, pages, read);
+    const readBlock = document.createElement('div');
+    readBlock.classList.add('read-block');
+    
+    element.append(readBlock, removeButton, readButton, title, author, pages);
     return element;
 }
 
@@ -107,7 +109,12 @@ function removeBook (event) {
 
 }
 
+function changeRead (event) {
+    event.target.parentNode.classList.toggle('read');
+    const id = event.target.parentNode.getAttribute('data-book-id');
+    library[id].read ? library[id].read = false : library[id].read = true;
 
+}
 
 // temporary books to view //
 for (let i = 0; i < 20; i++) {
