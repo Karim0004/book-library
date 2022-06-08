@@ -34,6 +34,13 @@ addButton.addEventListener('click', e => {
     const title = document.getElementById('title');
     const author = document.getElementById('author');
     const pages = document.getElementById('pages');
+    
+    // error checking if title or author are empty //
+    if (!title.value || !author.value) {
+        if (!title.value) title.classList.add('form-error');
+        if (!author.value) author.classList.add('form-error');
+        return;
+    }
     new book(title.value, author.value, Number(pages.value), read.classList.contains('on'));
 
     // clear the form //
@@ -45,6 +52,19 @@ addButton.addEventListener('click', e => {
     // update the library //
     updateLibraryView();
 });
+
+// error checking required form inputs //
+const inputs = document.querySelectorAll('.required');
+for (let input of inputs) {
+    input.addEventListener('keyup', (e) => {
+        if (!e.target.value && !e.target.classList.contains('form-error')) {
+            e.target.classList.add('form-error');
+        } else if (e.target.classList.contains('form-error')){
+            e.target.classList.remove('form-error');
+        }
+    })
+}
+
 
 function updateLibraryView() {
     clearLibraryView();
@@ -67,6 +87,7 @@ function clearLibraryView() {
     }
 }
 
+// take data from array and return book card DOM node //
 function createBookElement(book) {
     const element = document.createElement('div');
     element.classList.add('book-card');
