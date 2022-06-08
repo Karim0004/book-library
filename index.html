@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="purple">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,11 +13,23 @@
         <div class="nav">
             <p>Book Library</p>
             <input type="search">
+            <div class="color-buttons">
+                <button id="purple" class="color-on"></button>
+                <button id="blue"></button>
+                <button id="red"></button>
+                <button id="orange"></button>
+                <button id="slate"></button>
+            </div>
             <button class="view-form">Add Book</button>
         </div>
     
         <div class="sidebar">
-            <div></div>
+            <div class="sidebar-info">
+                <p>Book Count <br> <span></span></p>
+                <p>Read Books <br> <span></span></p>
+                <p>Unread Books <br> <span></span></p>
+                <p>Total Pages <br> <span></span></p>
+            </div>
         </div>
         <div class="library"></div>
     </div>

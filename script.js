@@ -1,6 +1,7 @@
 const library = [];
 const libraryView = document.querySelector('.library');
 let bookId = 0;
+const searchText = document.querySelector('.nav > input');
 
 // book constructor, also appends it to library //
 function book(title, author, pages, read=false) {
@@ -21,7 +22,7 @@ showForm.onclick = () => formView.classList.remove('hidden');
 formBody.onclick = (e) => e.stopPropagation();
 formView.onclick = (e) => formView.classList.add('hidden');
 
-// read button toggle switch //
+// insertion form read button toggle switch //
 const read = document.getElementById('read-button');
 read.addEventListener('click', e => {
     e.target.classList.toggle('on');
@@ -33,7 +34,7 @@ addButton.addEventListener('click', e => {
     const title = document.getElementById('title');
     const author = document.getElementById('author');
     const pages = document.getElementById('pages');
-    new book(title.value, author.value, pages.value, read.classList.contains('on'));
+    new book(title.value, author.value, Number(pages.value), read.classList.contains('on'));
 
     // clear the form //
     title.value = '', author.value = '', pages.value = '';
@@ -48,10 +49,16 @@ addButton.addEventListener('click', e => {
 function updateLibraryView() {
     clearLibraryView();
     for (let bookKey in library) {
+        if ( searchText.value
+            && library[bookKey].title.toLowerCase().search(searchText.value.toLowerCase()) === -1) {
+            continue;
+        }
         const bookElement = createBookElement(library[bookKey]);
+        // give the book element its array key as a data attribute //
         bookElement.setAttribute('data-book-id', bookKey);
         libraryView.appendChild(bookElement);
     }
+    updateSidebar();
 }
 
 function clearLibraryView() {
@@ -104,20 +111,56 @@ function removeBook (event) {
     setTimeout(() => {
         library.splice(event.target.parentNode.getAttribute('data-book-id'), 1);
         updateLibraryView();
-    }, 150) 
-
-
+    }, 150); 
 }
 
 function changeRead (event) {
     event.target.parentNode.classList.toggle('read');
     const id = event.target.parentNode.getAttribute('data-book-id');
     library[id].read ? library[id].read = false : library[id].read = true;
+    setTimeout(updateLibraryView, 300);
 
 }
+
+// sidebar information //
+const sidebarElements = document.querySelectorAll('.sidebar-info > p > span');
+let bookCount = 0, readBooks = 0, unreadBooks = 0, totalPages = 0;
+
+function updateSidebar () {
+    bookCount = 0, readBooks = 0, unreadBooks = 0, totalPages = 0;
+    for (let id in library) {
+        bookCount += 1;
+        library[id].read ? readBooks+= 1 : unreadBooks += 1;
+        totalPages+= library[id].pages;
+    }
+    sidebarElements[0].textContent = bookCount;
+    sidebarElements[1].textContent = readBooks;
+    sidebarElements[2].textContent = unreadBooks;
+    sidebarElements[3].textContent = totalPages;
+}
+
 
 // temporary books to view //
 for (let i = 0; i < 20; i++) {
     new book(`Title ${i}`, 'Author', 250, false);
 }
 updateLibraryView();
+
+
+// page color control //
+const colorButtons = document.querySelectorAll('.color-buttons > button');
+const root = document.querySelector(':root');
+for (let button of colorButtons) {
+    button.onclick = () => {
+        root.className =`${button.id}`
+    
+        for (let colorButton of colorButtons) {
+            colorButton.classList.remove('color-on');
+        }
+
+        button.classList.add('color-on');
+    }
+}
+
+// update library view when typing in filter box //
+searchText.addEventListener('keyup', updateLibraryView);
